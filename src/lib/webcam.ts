@@ -9,7 +9,7 @@ export class Webcam {
 
     public static of(element: HTMLVideoElement): Promise<Webcam> {
         return navigator.mediaDevices.getUserMedia({
-            video: true,
+            video: {facingMode: {ideal: 'environment'}},
             audio: false
         })
         .then(stream => new Webcam(element, stream))

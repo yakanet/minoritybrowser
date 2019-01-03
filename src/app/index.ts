@@ -4,14 +4,14 @@ const videoElement: HTMLVideoElement = document.querySelector('#video');
 const buttonElement: HTMLButtonElement = document.querySelector('#button');
 const canvasElement: HTMLCanvasElement = document.querySelector('#canvas');
 let webcam: Webcam;
-const faceDetector = new FaceDetector();
 const context = canvasElement.getContext('2d');
 
 async function init() {
     webcam = await Webcam.of(videoElement);
-    //const current = new MinoritySpeech();
-    const current = new MinorityFaceDetector();
+    const current = new MinoritySpeech();
+    //const current = new MinorityFaceDetector();
     //const current = new MinorityText();
+    //const current = new MinorityBarcode();
 
     buttonElement.addEventListener('click', () => { });
 
@@ -19,19 +19,22 @@ async function init() {
         current.tick();
         context.clearRect(0, 0, canvasElement.width, canvasElement.height);
         current.draw();
-        requestAnimationFrame(tickFn);
+        //requestAnimationFrame(tickFn);
     }
-    tickFn();
+    //tickFn();
+    setInterval(() => tickFn(), 30);
 }
 
 class MinorityFaceDetector {
+    private faceDetector = new FaceDetector();
+
     private faces: DetectedFace[] = [];
 
     async tick() {
         try {
-            this.faces = await faceDetector.detect(canvasElement);
+            this.faces = await this.faceDetector.detect(canvasElement);
         } catch (e) {
-            console.error(e);
+            console.error(e.message, e);
             this.faces = [];
         }
     }
@@ -49,6 +52,39 @@ class MinorityFaceDetector {
     }
 }
 
+class MinorityBarcode {
+    private barcodeDetector: BarcodeDetector;
+    private barcodes: DetectedBarcode[];
+
+    
+    constructor() {
+        this.barcodeDetector = new BarcodeDetector();
+    }
+
+    async tick() {
+        try {
+            this.barcodes = await this.barcodeDetector.detect(canvasElement);
+        } catch (e) {
+            console.error(e.message, e);
+            this.barcodes = [];
+        }
+    }
+
+    draw() {
+        webcam.shotToCanvas(canvasElement);
+        if(this.barcodes && this.barcodes.length) {
+            this.barcodes.forEach(barcode => {
+                const { x, y, width, height } = barcode.boundingBox;
+                context.fillStyle = 'white';
+                context.fillRect(x, y, width, Math.max(height, 100));
+                context.fillStyle = 'black';
+                context.fillText(barcode.rawValue, x, y + 15);
+                console.log(barcode);
+            });
+        }
+    }
+}
+
 class MinorityText {
     private textDetector: TextDetector;
     private texts: DetectedText[] = [];
@@ -61,8 +97,7 @@ class MinorityText {
         try {
             this.texts = await this.textDetector.detect(canvasElement);
         } catch (e) {
-            debugger;
-            console.error(e);
+            console.error(e.message, e);
             this.texts = [];
         }
     }

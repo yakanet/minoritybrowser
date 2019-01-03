@@ -4,3 +4,8 @@
 
 This app is an attempt to reproduce some of the feature seen in the movie Minority Report.
 
+
+| Browser | Barcode | Speech | FaceDetection | TextDetection |
+| -- | -------- | -- | -- | -- |
+| Chrome Windows | ❌ | ⭕ | ⭕ | ❌ |
+| Chrome Android| ⭕ | ? | ? | ? |
