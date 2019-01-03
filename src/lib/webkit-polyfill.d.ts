@@ -15,3 +15,6 @@ interface DetectedFace {
     },
     landmarks: any[];
 }
+
+declare class webkitSpeechRecognition extends SpeechRecognition {
+}

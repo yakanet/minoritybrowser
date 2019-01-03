@@ -13,12 +13,9 @@ export class Webcam {
             audio: false
         })
         .then(stream => new Webcam(element, stream))
-        .then(async (webcam) => {
-            await new Promise((resolve, _) => {
-                webcam.element.addEventListener('loadeddata', resolve);
-            });
-            return webcam;
-        });
+        .then(webcam => new Promise<Webcam>((resolve, _) => 
+            webcam.element.addEventListener('loadeddata', () => resolve(webcam)))
+        );
     }
 
     public shotToCanvas(canvas: HTMLCanvasElement) {

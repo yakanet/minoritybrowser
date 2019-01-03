@@ -11,11 +11,13 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "parcel": "^1.11.0",
     "sass": "^1.15.2",
     "typescript": "^3.2.2"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
