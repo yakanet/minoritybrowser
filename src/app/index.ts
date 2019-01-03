@@ -9,8 +9,9 @@ const context = canvasElement.getContext('2d');
 
 async function init() {
     webcam = await Webcam.of(videoElement);
-    const current = new MinoritySpeech();
-    //const current = new MinorityFaceDetector();
+    //const current = new MinoritySpeech();
+    const current = new MinorityFaceDetector();
+    //const current = new MinorityText();
 
     buttonElement.addEventListener('click', () => { });
 
@@ -48,11 +49,43 @@ class MinorityFaceDetector {
     }
 }
 
+class MinorityText {
+    private textDetector: TextDetector;
+    private texts: DetectedText[] = [];
+
+    constructor() {
+        this.textDetector = new TextDetector();
+    }
+
+    async tick() {
+        try {
+            this.texts = await this.textDetector.detect(canvasElement);
+        } catch (e) {
+            debugger;
+            console.error(e);
+            this.texts = [];
+        }
+    }
+
+    draw() {
+        webcam.shotToCanvas(canvasElement);
+        if(this.texts && this.texts.length) {
+            this.texts.forEach(text => {
+                const { x, y, width, height } = text.boundingBox;
+                context.strokeStyle = 'red';
+                context.lineWidth = 10;
+                context.strokeRect(x, y, width, height);
+                context.fillText(text.rawValue, x, y);
+            });
+        }
+    }
+}
+
 class MinoritySpeech {
     constructor() {
         var msg = new SpeechSynthesisUtterance('Bonjour à tous');
-
         msg.voice = speechSynthesis.getVoices().filter(function(voice) { return voice.name.indexOf('français') > -1 })[0];
+
         speechSynthesis.getVoices().forEach(function (voice) {
             console.log(voice.name, voice.default ? voice.default : '');
         });
@@ -65,7 +98,6 @@ class MinoritySpeech {
         };
         recognition.start();
         console.log(recognition);
-
     }
 
     tick() {
