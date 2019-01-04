@@ -1,20 +1,27 @@
+const speakElement = document.querySelector('#speak');
 
 async function init() {
-    const msg = new SpeechSynthesisUtterance('Bonjour à tous');
-    msg.voice = speechSynthesis.getVoices().filter(function (voice) { return voice.name.indexOf('français') > -1 })[0];
-
-    speechSynthesis.getVoices().forEach(function (voice) {
-        console.log(voice.name, voice.default ? voice.default : '');
+    speakElement.addEventListener('click', () => {
+        speak(document.querySelector('textarea').value);
     });
-    speechSynthesis.speak(msg);
 
     const recognition = new webkitSpeechRecognition();
     recognition.lang = 'fr';
+    recognition.continuous = true;
     recognition.onresult = (event) => {
         console.log(event.results[0][0]);
     };
     recognition.start();
     console.log(recognition);
+}
+
+function speak(message) {
+    speechSynthesis.getVoices().forEach(voice => console.log(voice.name, voice.default ? voice.default : ''));
+    const msg = new SpeechSynthesisUtterance(message);
+    msg.voice = speechSynthesis.getVoices().filter(voice => voice.name.indexOf('français') > -1)[0];
+    console.log('--------' + msg.voice.name);
+
+    speechSynthesis.speak(msg);
 }
 
 init();

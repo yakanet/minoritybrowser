@@ -1,0 +1,27 @@
+{
+  "name": "minority-report",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "parcel build src/index.html",
+    "watch": "parcel watch src/index.html",
+    "serve": "parcel src/index.html --log-level=4",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webcam": "file:../webcam"
+  },
+  "devDependencies": {
+    "@types/webkit": "file:../@types/webkit",
+    "parcel": "^1.11.0",
+    "sass": "^1.15.2",
+    "typescript": "^3.2.2"
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
+}

@@ -1,0 +1,30 @@
+body {
+  background: green;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.wrapper .photo {
+  position: absolute;
+  transition: all 1s;
+  border: 10px solid white;
+  border-width: 20px 10px;
+  opacity: .5;
+}
+
+.wrapper .photo.selected {
+  opacity: 1;
+}
+
+.wrapper .photo.zoom {
+  left: 300px !important;
+  top: 250px !important;
+  transform: scale(2) rotate(0deg) !important;
+  z-index: 1;
+}
+
+.wrapper .photo.zoom.done {
+
+}
