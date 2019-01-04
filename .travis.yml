@@ -2,4 +2,10 @@ language: node_js
 node_js:
   - "10"
 cache: npm
-script: npm run build
+env:
+  - PROJECT_DIR=shape-face
+  - PROJECT_DIR=shape-text
+  - PROJECT_DIR=voice
+  - PROJECT_DIR=shape-barcode
+#  - PROJECT_DIR=gesture
+script: cd $PROJECT_DIR && npm install && npm run build
