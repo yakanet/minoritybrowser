@@ -18,11 +18,21 @@ var Webcam = /** @class */ (function () {
             return webcam.element.addEventListener('loadeddata', function () { return resolve(webcam); });
         }); });
     };
-    Webcam.prototype.shotToCanvas = function (canvas) {
+    Webcam.prototype.shotToCanvas = function (canvas, flip) {
+        if (flip === void 0) { flip = false; }
         var context = canvas.getContext('2d');
         canvas.width = this.element.videoWidth;
         canvas.height = this.element.videoHeight;
-        context.drawImage(this.element, 0, 0);
+        if (flip) {
+            context.save();
+            context.scale(-1, 1);
+            context.translate(-canvas.width, 0);
+            context.drawImage(this.element, 0, 0);
+            context.restore();
+        }
+        else {
+            context.drawImage(this.element, 0, 0);
+        }
     };
     return Webcam;
 }());

@@ -3,5 +3,5 @@ export declare class Webcam {
     private stream;
     private constructor();
     static of(element: HTMLVideoElement): Promise<Webcam>;
-    shotToCanvas(canvas: HTMLCanvasElement): void;
+    shotToCanvas(canvas: HTMLCanvasElement, flip?: boolean): void;
 }

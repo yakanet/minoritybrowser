@@ -18,10 +18,18 @@ export class Webcam {
         );
     }
 
-    public shotToCanvas(canvas: HTMLCanvasElement) {
+    public shotToCanvas(canvas: HTMLCanvasElement, flip = false) {
         const context = canvas.getContext('2d');
         canvas.width = this.element.videoWidth;
         canvas.height = this.element.videoHeight;
-        context.drawImage(this.element, 0, 0);
+        if(flip) {
+            context.save();
+            context.scale(-1, 1);
+            context.translate(-canvas.width, 0);
+            context.drawImage(this.element, 0, 0);
+            context.restore();
+        } else {
+            context.drawImage(this.element, 0, 0);
+        }
     }
 }
