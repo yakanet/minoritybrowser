@@ -8,5 +8,7 @@ env:
   - PROJECT_DIR=voice
   - PROJECT_DIR=shape-barcode
   - PROJECT_DIR=final
+  - PROJECT_DIR=fingertip2
+#  - PROJECT_DIR=fingertip
 #  - PROJECT_DIR=gesture
 script: cd $PROJECT_DIR && npm install && npm run build
