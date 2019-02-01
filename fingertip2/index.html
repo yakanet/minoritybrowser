@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minority Report</title>
-    <style>
-        html, body { padding: 0; margin: 0}
-        body {background: black;}
-        video {position: absolute; opacity: 0}
-        canvas { position: absolute; height: 100%; margin: 0 auto; left: 0; right: 0; opacity: 0.5}
-        #preview { position: absolute; bottom: 0}
-    </style>
+    <link rel="stylesheet" href="styles.scss">
 </head>
 <body>
    <video id="video" playsinline autoplay></video>
    <canvas id="canvas"></canvas>
+   <div class="wrapper"></div>
    <div id="preview">
+    <button id="toggleSettings">🔧</button>
     <input type="range" min="20" value="35" max="100" id="slider" />
    </div>
    <script src="index.ts"></script>

@@ -77,14 +77,15 @@ export class CircleMenuSprite extends SpriteModel {
             lineWidth,
             strokeStyle: `rgb(41, 144, 209)`
         });
+
         drawCircle(context, circle.center.x, circle.center.y, 50, {
             lineWidth,
             strokeStyle: `red`
         });
 
-        drawLine(context, circle.center.x, circle.center.y, middle.x, middle.y, {
+        drawArc(context, circle.center.x, circle.center.y, 50, 0, angle, angle < 0, {
             lineWidth,
-            fillStyle: 'red'
+            strokeStyle: `white`
         });
 
         drawLine(context, circle.center.x, circle.center.y, normal.x, normal.y, {
@@ -97,9 +98,9 @@ export class CircleMenuSprite extends SpriteModel {
             strokeStyle: `green`
         });
 
-        drawArc(context, circle.center.x, circle.center.y, 50, 0, angle, angle < 0, {
+        drawLine(context, circle.center.x, circle.center.y, middle.x, middle.y, {
             lineWidth,
-            strokeStyle: `white`
+            strokeStyle: 'red'
         });
 
         drawText(context, circle.center.x + 10, circle.center.y - 10, Math.ceil(radToDeg(this.normalizedAngle)) + ' °', {

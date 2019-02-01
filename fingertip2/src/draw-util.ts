@@ -2,6 +2,12 @@ interface CanvasStyle {
     strokeStyle?: string;
     fillStyle?: string;
     lineWidth?: number;
+    font?: string;
+    shadowBlur?: number;
+    shadowColor?: string;
+    shadowOffsetX?: number;
+    shadowOffsetY?: number;
+    filter?: string;
 }
 
 export function drawText(context: CanvasRenderingContext2D, x: number, y: number, text: any, options: CanvasStyle) {
@@ -9,6 +15,13 @@ export function drawText(context: CanvasRenderingContext2D, x: number, y: number
         context[key] = options[key];
     }
     context.fillText('' + text, x, y);
+}
+
+export function drawRectangle(context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, options: CanvasStyle) {
+    for (let key in options) {
+        context[key] = options[key];
+    }
+    context.rect(x, y, w, h);
 }
 
 export function drawLine(context: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, options: CanvasStyle) {
