@@ -15,22 +15,12 @@ const wrapperElement: HTMLDivElement = document.querySelector('.wrapper');
 let webcam: Webcam;
 
 (document.querySelector('#toggleSettings') as HTMLButtonElement).onclick = (event) => {
-    if(document.body.classList.contains('settings')) {
-        document.body.classList.remove('settings');
-    } else {
-        document.body.classList.add('settings');
-    }
+    document.body.classList.toggle('settings');
 };
 
-const photoBook = new PhotoBook([
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-    'https://via.placeholder.com/300',
-]);
+const photoBook = new PhotoBook(Array.apply(null, {length: 10}).map(Number.call, Number).map(
+    (i) => `https://randomuser.me/api/portraits/${i % 2 === 0 ? 'women' : 'men'}/${Math.ceil(Math.random() * 90 + 1)}.jpg`,
+));
 const colorTracker = new ColorTracker();
 const circleMenu = new CircleMenuSprite();
 
@@ -65,6 +55,7 @@ async function init() {
 
 
 let lastAction = performance.now();
+
 function tick() {
     // Update color accuracy
     colorTracker.range = slider.value;
@@ -73,13 +64,13 @@ function tick() {
     circleMenu.tick();
 
     //
-    if(circleMenu.normalizedAngle > (Math.PI/2) && (performance.now() - lastAction) > 1000) {
-        lastAction = performance.now();
-        photoBook.zoom(photoBook.selectedPhotoIndex + 1);
-    }
-    if(circleMenu.normalizedAngle < (-Math.PI/2) && (performance.now() - lastAction) > 1000) {
+    if (circleMenu.normalizedAngle > (Math.PI / 2) && (performance.now() - lastAction) > 1000) {
         lastAction = performance.now();
         photoBook.zoom(photoBook.selectedPhotoIndex - 1);
+    }
+    if (circleMenu.normalizedAngle < (-Math.PI / 2) && (performance.now() - lastAction) > 1000) {
+        lastAction = performance.now();
+        photoBook.zoom(photoBook.selectedPhotoIndex + 1);
     }
 }
 
