@@ -15,9 +15,9 @@
   "devDependencies": {
     "@types/tracking": "^1.1.29",
     "@types/webkit": "file:../@types/webkit",
-    "parcel": "^1.11.0",
-    "sass": "^1.16.1",
-    "typescript": "^3.2.2"
+    "parcel": "^1.12.4",
+    "sass": "^1.23.0",
+    "typescript": "3.6.4"
   },
   "browserslist": [
     "last 1 Chrome version"
