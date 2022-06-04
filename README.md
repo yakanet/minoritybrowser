@@ -4,6 +4,10 @@
 
 This app is an attempt to reproduce some of the feature seen in the movie Minority Report.
 
+```
+pnpm install
+pnpm --filter "fingertip" serve
+```
 
 | Browser | Barcode | Speech | FaceDetection | TextDetection |
 | -- | -------- | -- | -- | -- |

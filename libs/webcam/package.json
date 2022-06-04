@@ -1,0 +1,16 @@
+{
+  "name": "@minoritybrowser/webcam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/webcam.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "typescript": "^4.7.3"
+  }
+}
