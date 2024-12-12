@@ -6,10 +6,10 @@ This app is an attempt to reproduce some of the feature seen in the movie Minori
 
 ```
 pnpm install
-pnpm --filter "fingertip" serve
+pnpm dev packages/fingertip
 ```
 
-| Browser | Barcode | Speech | FaceDetection | TextDetection |
-| -- | -------- | -- | -- | -- |
-| Chrome Windows | ❌ | ⭕ | ⭕ | ❌ |
-| Chrome Android| ⭕ | ? | ? | ? |
+| Browser        | Barcode | Speech | FaceDetection | TextDetection |
+| -------------- | ------- | ------ | ------------- | ------------- |
+| Chrome Windows | ❌      | ⭕     | ⭕            | ❌            |
+| Chrome Android | ⭕      | ?      | ?             | ?             |
