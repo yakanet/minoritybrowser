@@ -1,14 +1,14 @@
-const wrapperElement = document.querySelector('.wrapper');
+const wrapperElement = document.querySelector<HTMLDivElement>('.wrapper')!;
 
 
 class PhotoBook {
-    private wrapper: Element;
+    private wrapper: HTMLElement;
 
     constructor(private photoUrl: string[]) {
 
     }
 
-    public initLayout(wrapper: Element) {
+    public initLayout(wrapper: HTMLElement) {
         this.wrapper = wrapper;
         const perRow = Math.floor(innerWidth / 300);
 
@@ -65,15 +65,15 @@ function init() {
         const result = event.results[event.results.length - 1];
         if (result.isFinal) {
             let reg;
-            if (reg = result[0].transcript.match('sélectionner .* ([0-9]+)')) {
+            if (reg = result[0].transcript.match(/sélectionner .* ([0-9]+)/i)) {
                 console.log('action = select ' + reg[1]);
                 photoBook.selectPhoto(reg[1] - 1);
             }
-            if (reg = result[0].transcript.match('(a?grandir|zoomer|zoom) .* ([0-9]+)')) {
+            if (reg = result[0].transcript.match(/(a?grandir|zoomer|zoom) .* ([0-9]+)/i)) {
                 console.log('action = zoom ' + reg[2]);
                 photoBook.zoom(reg[2] - 1);
             }
-            else if (reg = result[0].transcript.match('annuler')) {
+            else if (reg = result[0].transcript.match(/annuler/i)) {
                 console.log('action = cancel');
                 photoBook.cancel();
             }
